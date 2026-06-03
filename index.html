@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matix | Bio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Video Background -->
+    <video autoplay muted loop id="bg-video">
+        <source src="background.mp4" type="video/mp4">
+        <!-- Fallback if user doesn't have the file -->
+        <source src="https://cdn.pixabay.com/video/2021/09/01/87108-601444106_large.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+
+    <!-- UI Controls -->
+    <div class="ui-controls">
+        <button id="mute-btn" class="control-btn"><i class="fas fa-volume-mute"></i></button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="content-wrapper">
+            <header class="profile-header">
+                <img src="avatar.png" alt="Matix" class="header-icon">
+                <h1 class="name">Matix</h1>
+                <p class="tagline">Developer & Content Creator</p>
+            </header>
+
+            <!-- Discord Presence Card -->
+            <div id="discord-card" class="glass-card">
+                <div class="discord-content">
+                    <img id="discord-avatar" src="" alt="" class="discord-avatar hidden">
+                    <div class="discord-info">
+                        <p id="discord-status">Loading Discord Presence...</p>
+                        <p id="discord-activity"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Icons -->
+            <div class="social-icons">
+                <a href="https://www.youtube.com/channel/UCAeS1v86qjB3tzJRU2dRxNA" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://github.com/MatixArg" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://discord.com" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+            </div>
+
+            <!-- Contact -->
+            <div class="contact">
+                <a href="mailto:matix.corporation@outlook.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> matix.corporation@outlook.com
+                </a>
+            </div>
+        </div>
+
+        <!-- Music Player (Spotify Sync) -->
+        <div id="music-player" class="music-player">
+            <div class="player-content">
+                <div class="song-info">
+                    <img id="spotify-album-art" src="https://via.placeholder.com/60" alt="Album Art" class="album-art">
+                    <div class="song-details">
+                        <p id="song-name">Not Listening to Anything</p>
+                        <p id="artist-name">Spotify</p>
+                    </div>
+                </div>
+                <div class="player-controls">
+                    <div class="progress-container">
+                        <span id="current-time">0:00</span>
+                        <div class="progress-bar">
+                            <div id="progress" class="progress"></div>
+                        </div>
+                        <span id="total-time">0:00</span>
+                    </div>
+                    <div class="buttons">
+                        <i class="fas fa-step-backward"></i>
+                        <i id="play-pause" class="fas fa-play"></i>
+                        <i class="fas fa-step-forward"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visitor Count -->
+        <div class="visitor-count">
+            <i class="fas fa-eye"></i> <span id="count">0</span>
+        </div>
+    </main>
+
+    <canvas id="particles"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
