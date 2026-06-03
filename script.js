@@ -402,7 +402,26 @@ animateParticles();
 const video = document.getElementById("bg-video");
 const muteBtn = document.getElementById("mute-btn");
 
-video.play().catch(() => {});
+function initVideo() {
+    video.load();
+    const tryPlay = () => {
+        video.play().catch(() => {
+            document.addEventListener("touchstart", () => {
+                video.play().catch(() => {});
+            }, { once: true });
+        });
+    };
+    if (isTouchDevice) {
+        video.muted = true;
+        tryPlay();
+        document.addEventListener("touchstart", () => {
+            video.play().catch(() => {});
+        }, { once: true });
+    } else {
+        tryPlay();
+    }
+}
+initVideo();
 
 if (muteBtn) {
     muteBtn.addEventListener('click', async () => {
