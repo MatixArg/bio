@@ -203,6 +203,33 @@ body {
     filter: drop-shadow(0 0 8px var(--accent-glow));
 }
 
+/* Spotify Connect Button */
+.spotify-connect-btn {
+    background: #1db954;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+}
+
+.spotify-connect-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(29, 185, 84, 0.5);
+}
+
+#spotify-connected {
+    display: flex;
+}
+
 /* Music Player */
 .music-player {
     position: fixed;

@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
 <body>
     <!-- Video Background -->
@@ -59,13 +60,13 @@
             </div>
         </div>
 
-        <!-- Music Player (Spotify Sync) -->
+        <!-- Music Player (Spotify) -->
         <div id="music-player" class="music-player">
-            <div class="player-content">
+            <div id="spotify-connected" class="player-content hidden">
                 <div class="song-info">
                     <img id="spotify-album-art" src="https://via.placeholder.com/60" alt="Album Art" class="album-art">
                     <div class="song-details">
-                        <p id="song-name">Not Listening to Anything</p>
+                        <p id="song-name">Not Playing</p>
                         <p id="artist-name">Spotify</p>
                     </div>
                 </div>
@@ -78,11 +79,16 @@
                         <span id="total-time">0:00</span>
                     </div>
                     <div class="buttons">
-                        <i class="fas fa-step-backward"></i>
+                        <i id="prev-btn" class="fas fa-step-backward"></i>
                         <i id="play-pause" class="fas fa-play"></i>
-                        <i class="fas fa-step-forward"></i>
+                        <i id="next-btn" class="fas fa-step-forward"></i>
                     </div>
                 </div>
+            </div>
+            <div id="spotify-disconnected" class="player-content">
+                <button id="connect-spotify" class="spotify-connect-btn">
+                    <i class="fab fa-spotify"></i> Conectar Spotify
+                </button>
             </div>
         </div>
 
