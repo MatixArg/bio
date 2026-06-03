@@ -155,6 +155,7 @@ body {
 .cursor {
     color: var(--primary-red);
     animation: blink 0.7s infinite;
+    will-change: opacity;
 }
 
 @keyframes blink {
@@ -375,6 +376,7 @@ body {
     border-radius: 3px;
     transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
     box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+    will-change: width;
 }
 
 .skills-section.visible .skill-fill {

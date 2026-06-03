@@ -233,7 +233,7 @@ document.addEventListener("keydown", (e) => {
 
 function triggerNarutoEasterEgg() {
     const colors = ["#ff6b35", "#f7d94f", "#ff4d4d", "#ff8c00", "#fff"];
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 30; i++) {
         setTimeout(() => {
             const el = document.createElement("div");
             el.style.cssText = `
@@ -269,7 +269,7 @@ if (cursorCanvas) {
 }
 
 let cursorParticles = [];
-const MAX_CURSOR = 30;
+const MAX_CURSOR = 20;
 let lastMouseX = 0, lastMouseY = 0;
 let mouseMoved = false;
 
@@ -313,7 +313,7 @@ if (!isTouchDevice) {
         const dx = e.clientX - lastMouseX;
         const dy = e.clientY - lastMouseY;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const steps = Math.min(Math.ceil(dist / 8), 20);
+        const steps = Math.min(Math.ceil(dist / 10), 10);
         for (let s = 0; s <= steps; s++) {
             const x = lastMouseX + (dx * s) / steps;
             const y = lastMouseY + (dy * s) / steps;
@@ -373,7 +373,7 @@ class Particle {
 
 function initParticles() {
     particlesArray = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < (isTouchDevice ? 25 : 50); i++) {
         particlesArray.push(new Particle());
     }
 }

@@ -21,9 +21,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <video autoplay muted loop playsinline webkit-playsinline preload="auto" id="bg-video">
+    <video autoplay muted loop playsinline webkit-playsinline preload="metadata" id="bg-video">
         <source src="background.mp4" type="video/mp4">
-        <source src="https://cdn.pixabay.com/video/2021/09/01/87108-601444106_large.mp4" type="video/mp4">
     </video>
     <div class="video-overlay"></div>
 
@@ -33,7 +32,7 @@
             <button id="lang-btn" class="control-btn" title="Change language">ES</button>
         </div>
         <div id="music-player" class="music-player-top">
-            <iframe src="https://open.spotify.com/embed/playlist/4C0OHAQNX3WgeE2hLogbh1?utm_source=generator" width="260" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;"></iframe>
+            <iframe src="https://open.spotify.com/embed/playlist/4C0OHAQNX3WgeE2hLogbh1?utm_source=generator" width="260" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;" title="Spotify Player"></iframe>
         </div>
     </div>
 
@@ -125,6 +124,6 @@
     <canvas id="particles"></canvas>
     <canvas id="cursor-canvas"></canvas>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
