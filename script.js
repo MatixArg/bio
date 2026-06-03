@@ -248,6 +248,8 @@ cursorCanvas.height = window.innerHeight;
 
 let cursorParticles = [];
 const MAX_CURSOR = 30;
+let lastMouseX = 0, lastMouseY = 0;
+let mouseMoved = false;
 
 class CursorParticle {
     constructor(x, y) {
@@ -280,9 +282,22 @@ class CursorParticle {
 }
 
 document.addEventListener("mousemove", (e) => {
-    for (let i = 0; i < 3; i++) {
-        cursorParticles.push(new CursorParticle(e.clientX, e.clientY));
+    if (!mouseMoved) {
+        lastMouseX = e.clientX;
+        lastMouseY = e.clientY;
+        mouseMoved = true;
     }
+    const dx = e.clientX - lastMouseX;
+    const dy = e.clientY - lastMouseY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const steps = Math.min(Math.ceil(dist / 8), 20);
+    for (let s = 0; s <= steps; s++) {
+        const x = lastMouseX + (dx * s) / steps;
+        const y = lastMouseY + (dy * s) / steps;
+        cursorParticles.push(new CursorParticle(x, y));
+    }
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
     if (cursorParticles.length > MAX_CURSOR * 3) {
         cursorParticles.splice(0, cursorParticles.length - MAX_CURSOR * 3);
     }
