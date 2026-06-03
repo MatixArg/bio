@@ -303,6 +303,17 @@ class CursorParticle {
     }
 }
 
+function animateCursorParticles() {
+    if (!particlesEnabled || isTouchDevice) return;
+    cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
+    cursorParticles = cursorParticles.filter(p => p.life > 0);
+    for (const p of cursorParticles) {
+        p.update();
+        p.draw();
+    }
+    cursorAnimId = requestAnimationFrame(animateCursorParticles);
+}
+
 if (!isTouchDevice) {
     document.addEventListener("mousemove", (e) => {
         if (!mouseMoved) {
@@ -326,20 +337,15 @@ if (!isTouchDevice) {
         }
     });
 
-    function animateCursorParticles() {
-        cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
-        cursorParticles = cursorParticles.filter(p => p.life > 0);
-        for (const p of cursorParticles) {
-            p.update();
-            p.draw();
-        }
-        requestAnimationFrame(animateCursorParticles);
-    }
-
     animateCursorParticles();
 }
 
-// ─── Snow Particles (existing) ───
+// ─── Global Particle Toggle ───
+let particlesEnabled = true;
+let snowAnimId = null;
+let cursorAnimId = null;
+
+// ─── Snow Particles ───
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -379,12 +385,13 @@ function initParticles() {
 }
 
 function animateParticles() {
+    if (!particlesEnabled) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
         particlesArray[i].draw();
     }
-    requestAnimationFrame(animateParticles);
+    snowAnimId = requestAnimationFrame(animateParticles);
 }
 
 window.addEventListener('resize', () => {
@@ -392,11 +399,39 @@ window.addEventListener('resize', () => {
     canvas.height = window.innerHeight;
     cursorCanvas.width = window.innerWidth;
     cursorCanvas.height = window.innerHeight;
-    initParticles();
+    if (particlesEnabled) initParticles();
 });
 
 initParticles();
 animateParticles();
+
+// ─── Particle Toggle Button ───
+const particleBtn = document.getElementById("particle-toggle");
+
+function toggleParticles() {
+    particlesEnabled = !particlesEnabled;
+    const snowCanvas = document.getElementById("particles");
+    const cursorCanvasEl = document.getElementById("cursor-canvas");
+
+    if (particlesEnabled) {
+        snowCanvas.style.display = "block";
+        if (cursorCanvasEl) cursorCanvasEl.style.display = isTouchDevice ? "none" : "block";
+        particleBtn.innerHTML = '<i class="fas fa-sparkles"></i>';
+        initParticles();
+        animateParticles();
+        if (!isTouchDevice) animateCursorParticles();
+    } else {
+        snowCanvas.style.display = "none";
+        if (cursorCanvasEl) cursorCanvasEl.style.display = "none";
+        particleBtn.innerHTML = '<i class="fas fa-sparkles" style="color:#666"></i>';
+        if (snowAnimId) cancelAnimationFrame(snowAnimId);
+        if (cursorAnimId) cancelAnimationFrame(cursorAnimId);
+    }
+}
+
+if (particleBtn) {
+    particleBtn.addEventListener("click", toggleParticles);
+}
 
 // ─── UI Controls ───
 const video = document.getElementById("bg-video");
