@@ -406,7 +406,7 @@ function initVideo() {
     if (isTouchDevice) {
         video.style.display = "none";
         document.querySelector(".video-overlay").style.background =
-            "linear-gradient(135deg, #0a0015 0%, #1a0030 30%, #2d004d 60%, #1a0030 100%)";
+            "linear-gradient(135deg, #1a0500 0%, #3d1400 30%, #662200 60%, #1a0000 100%)";
         const style = document.createElement("style");
         style.textContent = `
             @keyframes mobileBg {
@@ -421,8 +421,8 @@ function initVideo() {
                 left: -50%;
                 width: 200%;
                 height: 200%;
-                background: radial-gradient(circle at 30% 50%, rgba(255,77,77,0.08) 0%, transparent 50%),
-                            radial-gradient(circle at 70% 50%, rgba(123,47,247,0.08) 0%, transparent 50%);
+                background: radial-gradient(circle at 30% 50%, rgba(255,107,53,0.1) 0%, transparent 50%),
+                            radial-gradient(circle at 70% 50%, rgba(255,77,0,0.08) 0%, transparent 50%);
                 animation: mobileBg 20s linear infinite;
                 z-index: -1;
             }

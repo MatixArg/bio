@@ -16,8 +16,8 @@
 body {
     font-family: 'Outfit', sans-serif;
     color: var(--text-white);
-    background: #0a0a0a;
-    background-image: radial-gradient(ellipse at center, #1a0a0a 0%, #000 100%);
+    background: #050000;
+    background-image: radial-gradient(ellipse at center, #1a0800 0%, #000 100%);
     overflow-y: auto;
     overflow-x: hidden;
     height: 100vh;
