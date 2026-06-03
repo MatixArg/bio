@@ -414,16 +414,16 @@ function toggleParticles() {
     const cursorCanvasEl = document.getElementById("cursor-canvas");
 
     if (particlesEnabled) {
-        snowCanvas.style.display = "block";
-        if (cursorCanvasEl) cursorCanvasEl.style.display = isTouchDevice ? "none" : "block";
-        particleBtn.innerHTML = '<i class="fas fa-sparkles"></i>';
+        if (snowCanvas) snowCanvas.style.display = "block";
+        if (cursorCanvasEl) cursorCanvasEl.style.display = (isTouchDevice || !cursorCtx) ? "none" : "block";
+        particleBtn.innerHTML = '<i class="fas fa-snowflake"></i>';
         initParticles();
         animateParticles();
         if (!isTouchDevice) animateCursorParticles();
     } else {
-        snowCanvas.style.display = "none";
+        if (snowCanvas) snowCanvas.style.display = "none";
         if (cursorCanvasEl) cursorCanvasEl.style.display = "none";
-        particleBtn.innerHTML = '<i class="fas fa-sparkles" style="color:#666"></i>';
+        particleBtn.innerHTML = '<i class="fas fa-snowflake" style="color:#666"></i>';
         if (snowAnimId) cancelAnimationFrame(snowAnimId);
         if (cursorAnimId) cancelAnimationFrame(cursorAnimId);
     }
