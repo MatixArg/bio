@@ -120,6 +120,7 @@ animateParticles();
 // UI Controls
 const video = document.getElementById("bg-video");
 const muteBtn = document.getElementById("mute-btn");
+const volumeSlider = document.getElementById("volume-slider");
 
 video.play().catch(() => {});
 
@@ -130,5 +131,15 @@ if (muteBtn) {
             try { await video.play(); } catch (e) {}
         }
         muteBtn.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+    });
+}
+
+if (volumeSlider) {
+    volumeSlider.addEventListener('input', () => {
+        video.volume = volumeSlider.value;
+        if (video.volume > 0 && video.muted) {
+            video.muted = false;
+            muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+        }
     });
 }
