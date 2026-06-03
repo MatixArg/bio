@@ -259,11 +259,14 @@ styleSheet.textContent = `
 `;
 document.head.appendChild(styleSheet);
 
-// ─── Cursor Particles ───
+// ─── Cursor Particles (disabled on touch) ───
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 const cursorCanvas = document.getElementById("cursor-canvas");
-const cursorCtx = cursorCanvas.getContext("2d");
-cursorCanvas.width = window.innerWidth;
-cursorCanvas.height = window.innerHeight;
+const cursorCtx = cursorCanvas?.getContext("2d");
+if (cursorCanvas) {
+    cursorCanvas.width = window.innerWidth;
+    cursorCanvas.height = window.innerHeight;
+}
 
 let cursorParticles = [];
 const MAX_CURSOR = 30;
@@ -300,39 +303,41 @@ class CursorParticle {
     }
 }
 
-document.addEventListener("mousemove", (e) => {
-    if (!mouseMoved) {
+if (!isTouchDevice) {
+    document.addEventListener("mousemove", (e) => {
+        if (!mouseMoved) {
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+            mouseMoved = true;
+        }
+        const dx = e.clientX - lastMouseX;
+        const dy = e.clientY - lastMouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const steps = Math.min(Math.ceil(dist / 8), 20);
+        for (let s = 0; s <= steps; s++) {
+            const x = lastMouseX + (dx * s) / steps;
+            const y = lastMouseY + (dy * s) / steps;
+            cursorParticles.push(new CursorParticle(x, y));
+        }
         lastMouseX = e.clientX;
         lastMouseY = e.clientY;
-        mouseMoved = true;
-    }
-    const dx = e.clientX - lastMouseX;
-    const dy = e.clientY - lastMouseY;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-    const steps = Math.min(Math.ceil(dist / 8), 20);
-    for (let s = 0; s <= steps; s++) {
-        const x = lastMouseX + (dx * s) / steps;
-        const y = lastMouseY + (dy * s) / steps;
-        cursorParticles.push(new CursorParticle(x, y));
-    }
-    lastMouseX = e.clientX;
-    lastMouseY = e.clientY;
-    if (cursorParticles.length > MAX_CURSOR * 3) {
-        cursorParticles.splice(0, cursorParticles.length - MAX_CURSOR * 3);
-    }
-});
+        if (cursorParticles.length > MAX_CURSOR * 3) {
+            cursorParticles.splice(0, cursorParticles.length - MAX_CURSOR * 3);
+        }
+    });
 
-function animateCursorParticles() {
-    cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
-    cursorParticles = cursorParticles.filter(p => p.life > 0);
-    for (const p of cursorParticles) {
-        p.update();
-        p.draw();
+    function animateCursorParticles() {
+        cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
+        cursorParticles = cursorParticles.filter(p => p.life > 0);
+        for (const p of cursorParticles) {
+            p.update();
+            p.draw();
+        }
+        requestAnimationFrame(animateCursorParticles);
     }
-    requestAnimationFrame(animateCursorParticles);
+
+    animateCursorParticles();
 }
-
-animateCursorParticles();
 
 // ─── Snow Particles (existing) ───
 const canvas = document.getElementById("particles");
