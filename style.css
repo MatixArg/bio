@@ -74,51 +74,6 @@ body {
     border-radius: 8px;
     cursor: pointer;
     backdrop-filter: blur(5px);
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.volume-wrapper {
-    overflow: hidden;
-    width: 0;
-    transition: width 0.3s ease;
-}
-
-.ui-controls:hover .volume-wrapper {
-    width: 100px;
-}
-
-.volume-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 2px;
-    outline: none;
-    cursor: pointer;
-}
-
-.volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-}
-
-.volume-slider::-moz-range-thumb {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-    border: none;
 }
 
 /* Container */
