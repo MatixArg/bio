@@ -403,23 +403,36 @@ const video = document.getElementById("bg-video");
 const muteBtn = document.getElementById("mute-btn");
 
 function initVideo() {
-    video.load();
-    const tryPlay = () => {
-        video.play().catch(() => {
-            document.addEventListener("touchstart", () => {
-                video.play().catch(() => {});
-            }, { once: true });
-        });
-    };
     if (isTouchDevice) {
-        video.muted = true;
-        tryPlay();
-        document.addEventListener("touchstart", () => {
-            video.play().catch(() => {});
-        }, { once: true });
-    } else {
-        tryPlay();
+        video.style.display = "none";
+        document.querySelector(".video-overlay").style.background =
+            "linear-gradient(135deg, #0a0015 0%, #1a0030 30%, #2d004d 60%, #1a0030 100%)";
+        const style = document.createElement("style");
+        style.textContent = `
+            @keyframes mobileBg {
+                0% { transform: scale(1) rotate(0deg); }
+                50% { transform: scale(1.1) rotate(180deg); }
+                100% { transform: scale(1) rotate(360deg); }
+            }
+            .video-overlay::before {
+                content: '';
+                position: fixed;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle at 30% 50%, rgba(255,77,77,0.08) 0%, transparent 50%),
+                            radial-gradient(circle at 70% 50%, rgba(123,47,247,0.08) 0%, transparent 50%);
+                animation: mobileBg 20s linear infinite;
+                z-index: -1;
+            }
+        `;
+        document.head.appendChild(style);
+        return;
     }
+
+    video.load();
+    video.play().catch(() => {});
 }
 initVideo();
 
