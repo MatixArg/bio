@@ -322,6 +322,64 @@ body {
 }
 
 /* Music Player */
+/* Skills Section */
+.skills-section {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 50px;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.skill-item {
+    text-align: left;
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+.skill-name i {
+    width: 18px;
+    margin-right: 6px;
+}
+
+.skill-pct {
+    color: var(--primary-red);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.skill-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary-red), #ff8c00);
+    border-radius: 3px;
+    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.skills-section.visible .skill-fill {
+    width: attr(data-width);
+}
+
 .projects-section {
     padding-bottom: 60px;
 }

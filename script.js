@@ -107,6 +107,7 @@ setTimeout(typeEffect, 1000);
 // ─── Language Switcher ───
 const LANGS = {
     es: {
+        skills: "Habilidades",
         projects: "Proyectos",
         listening: "Escuchando",
         playing: "Jugando",
@@ -114,6 +115,7 @@ const LANGS = {
         lang: "EN",
     },
     en: {
+        skills: "Skills",
         projects: "Projects",
         listening: "Listening to",
         playing: "Playing",
@@ -151,6 +153,23 @@ function setLanguage(lang) {
 document.getElementById("lang-btn").addEventListener("click", () => {
     setLanguage(currentLang === "es" ? "en" : "es");
 });
+
+// ─── Skill Bars Animation ───
+const skillsSection = document.getElementById("skills");
+if (skillsSection) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                skillsSection.querySelectorAll(".skill-item").forEach(item => {
+                    const fill = item.querySelector(".skill-fill");
+                    fill.style.width = item.dataset.width + "%";
+                });
+                observer.unobserve(skillsSection);
+            }
+        });
+    }, { threshold: 0.3 });
+    observer.observe(skillsSection);
+}
 
 // ─── GitHub Projects ───
 async function fetchProjects() {
