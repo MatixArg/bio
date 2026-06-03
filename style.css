@@ -354,7 +354,7 @@ body {
 }
 
 .skill-pct {
-    color: var(--primary-red);
+    color: #00d4ff;
     font-weight: 600;
     font-size: 0.85rem;
 }
@@ -370,10 +370,10 @@ body {
 .skill-fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, var(--primary-red), #ff8c00);
+    background: linear-gradient(90deg, #00d4ff, #7b2ff7);
     border-radius: 3px;
     transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-    box-shadow: 0 0 10px var(--accent-glow);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
 }
 
 .skills-section.visible .skill-fill {
