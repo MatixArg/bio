@@ -315,6 +315,10 @@ body {
 }
 
 /* Music Player */
+.projects-section {
+    padding-bottom: 120px;
+}
+
 .music-player {
     position: fixed;
     bottom: 40px;
