@@ -61,14 +61,12 @@ function formatTime(ms) {
 // ─── Typing Effect ───
 const TYPING_TEXTS = {
     es: [
-        "Developer & Content Creator",
-        "Apasionado por la tecnologia",
-        "Creador de contenido"
+        "Soy Matix, Developer & Content Creator",
+        "Apasionado por la tecnologia"
     ],
     en: [
-        "Developer & Content Creator",
-        "Tech enthusiast",
-        "Content creator"
+        "I'm Matix, Developer & Content Creator",
+        "Tech enthusiast"
     ]
 };
 
