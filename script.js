@@ -208,14 +208,12 @@ async function fetchProjects() {
 fetchProjects();
 
 // ─── Visitor Counter ───
-async function updateCounter() {
-    try {
-        const res = await fetch("https://api.countapi.xyz/hit/portaldev.tech/visits");
-        const data = await res.json();
-        document.getElementById("count").textContent = data.value;
-    } catch (e) {
-        document.getElementById("count").textContent = "---";
-    }
+function updateCounter() {
+    const key = "bio_visits";
+    let count = parseInt(localStorage.getItem(key) || "0");
+    count++;
+    localStorage.setItem(key, count);
+    document.getElementById("count").textContent = count;
 }
 updateCounter();
 
