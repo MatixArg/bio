@@ -478,3 +478,106 @@ if (muteBtn) {
         muteBtn.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
     });
 }
+
+// ─── YouTube Background Music ───
+const PLAYLIST = [
+    { id: "qKUblSAKXtw", title: "El Cielo - Myke Towers, Sky Rompiendo" },
+    { id: "xCZuaSSL7Ws", title: "She Don't Give a F - Fuki" },
+];
+
+let ytPlayer = null;
+let currentTrack = 0;
+let isPlaying = false;
+let ytLoading = false;
+
+const musicBtn = document.getElementById("music-toggle");
+const nowPlayingEl = document.getElementById("now-playing");
+
+function onYouTubeIframeAPIReady() {
+    ytPlayer = new YT.Player("youtube-player", {
+        height: "1",
+        width: "1",
+        playerVars: {
+            autoplay: 0,
+            controls: 0,
+            disablekb: 1,
+            enablejsapi: 1,
+            fs: 0,
+            modestbranding: 1,
+            playsinline: 1,
+            rel: 0,
+        },
+        events: {
+            onReady: () => { ytLoading = false; },
+            onStateChange: (event) => {
+                if (event.data === YT.PlayerState.ENDED) {
+                    currentTrack = (currentTrack + 1) % PLAYLIST.length;
+                    playTrack(currentTrack);
+                }
+            },
+        },
+    });
+}
+
+function playTrack(index) {
+    if (!ytPlayer) return;
+    currentTrack = index % PLAYLIST.length;
+    ytPlayer.loadVideoById(PLAYLIST[currentTrack].id);
+    ytPlayer.playVideo();
+    isPlaying = true;
+    updateMusicUI();
+}
+
+function toggleMusic() {
+    if (!window.YT) {
+        if (ytLoading) return;
+        ytLoading = true;
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        tag.onload = () => {
+            const check = setInterval(() => {
+                if (ytPlayer && ytPlayer.playVideo) {
+                    clearInterval(check);
+                    toggleMusic();
+                }
+            }, 300);
+        };
+        document.head.appendChild(tag);
+        return;
+    }
+
+    if (isPlaying) {
+        ytPlayer.pauseVideo();
+        isPlaying = false;
+        updateMusicUI();
+    } else {
+        if (ytPlayer.getCurrentTime && ytPlayer.getCurrentTime() > 0) {
+            ytPlayer.playVideo();
+        } else {
+            playTrack(currentTrack);
+        }
+        isPlaying = true;
+        updateMusicUI();
+    }
+}
+
+function updateMusicUI() {
+    if (isPlaying) {
+        musicBtn.classList.add("playing");
+        musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        musicBtn.title = "Pause";
+        nowPlayingEl.textContent = `♫ ${PLAYLIST[currentTrack].title}`;
+        nowPlayingEl.classList.remove("hidden");
+    } else {
+        musicBtn.classList.remove("playing");
+        musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+        musicBtn.title = "Play";
+        nowPlayingEl.classList.add("hidden");
+    }
+}
+
+if (musicBtn) {
+    musicBtn.addEventListener("click", toggleMusic);
+}
+
+window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;

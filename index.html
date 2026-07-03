@@ -31,6 +31,7 @@
             <button id="mute-btn" class="control-btn"><i class="fas fa-volume-mute"></i></button>
             <button id="lang-btn" class="control-btn" title="Change language">ES</button>
             <button id="particle-toggle" class="control-btn" title="Toggle particles"><i class="fas fa-snowflake"></i></button>
+            <button id="music-toggle" class="control-btn" title="Play music"><i class="fas fa-music"></i></button>
         </div>
         <div id="music-player" class="music-player-top">
             <iframe src="https://open.spotify.com/embed/playlist/4C0OHAQNX3WgeE2hLogbh1?utm_source=generator" width="260" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 12px;" title="Spotify Player"></iframe>
@@ -124,6 +125,8 @@
 
     <canvas id="particles"></canvas>
     <canvas id="cursor-canvas"></canvas>
+    <div id="youtube-player" style="position:fixed; bottom:-100px; left:-100px; width:1px; height:1px; pointer-events:none; opacity:0;"></div>
+    <div id="now-playing" class="now-playing hidden"></div>
 
     <script src="script.js" defer></script>
 </body>
