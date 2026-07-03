@@ -356,7 +356,6 @@ body {
     gap: 4px;
 }
 
-/* Music Player */
 /* Skills Section */
 .skills-section {
     width: 100%;
@@ -420,21 +419,6 @@ body {
     padding-bottom: 60px;
 }
 
-.music-player-top {
-    margin-top: 10px;
-    line-height: 0;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-}
-
-.music-player-top:hover {
-    opacity: 1;
-}
-
-.music-player-top iframe {
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
 /* Visitor Count */
 .visitor-count {
     margin-top: 40px;
@@ -457,7 +441,6 @@ body {
 
     .ui-controls { top: 12px; left: 12px; }
     .control-btn { padding: 8px 10px; min-width: 36px; min-height: 36px; font-size: 0.75rem; }
-    .music-player-top iframe { width: 180px !important; height: 64px !important; }
 
     .container { padding: 80px 15px 80px; }
     .skills-section { max-width: 100%; padding: 0 5px; margin-top: 35px; }
@@ -481,7 +464,6 @@ body {
 
 @media (max-width: 480px) {
     .name { font-size: 2rem; }
-    .music-player-top iframe { width: 150px !important; height: 56px !important; }
     .container { padding: 70px 12px 60px; }
     .glass-card { max-width: 280px; }
 }
