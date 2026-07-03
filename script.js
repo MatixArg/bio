@@ -1,5 +1,10 @@
 const DISCORD_ID = "708077224598962335";
 
+// ─── Global Particle Toggle ───
+let particlesEnabled = true;
+let snowAnimId = null;
+let cursorAnimId = null;
+
 // ─── Lanyard WebSocket ───
 let socket = new WebSocket("wss://api.lanyard.rest/socket");
 
@@ -337,11 +342,6 @@ if (!isTouchDevice) {
 
     animateCursorParticles();
 }
-
-// ─── Global Particle Toggle ───
-let particlesEnabled = true;
-let snowAnimId = null;
-let cursorAnimId = null;
 
 // ─── Snow Particles ───
 const canvas = document.getElementById("particles");
